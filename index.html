@@ -1390,7 +1390,9 @@ a:focus-visible, button:focus-visible, [role="tab"]:focus-visible, [tabindex]:fo
   /* ---------- misc ---------- */
   $('#copy')&&$('#copy').addEventListener('click',()=>{ try{ navigator.clipboard.writeText(CFG.email).then(()=>toast('Email copied'),()=>toast('Copy blocked here. Select the address instead.')); }catch(e){ toast('Select the address to copy it'); } });
   const cvm=$('#cvm'), onSite=!/claude\.ai|claudeusercontent/.test(location.hostname) && location.protocol!=='file:';
-  if(!onSite||!CFG.cvUrl) $('#cvPdf').remove(); else $('#cvPdf').href=CFG.cvUrl;
+  const CV_DATA='Nadeen-Mostafa-CV.pdf';
+  if(/claude\.ai|claudeusercontent/.test(location.hostname)) $('#cvPdf').remove();
+  else { const b=$('#cvPdf'); b.href = location.protocol==='file:' ? CV_DATA : CFG.cvUrl; b.setAttribute('download','Nadeen-Mostafa-CV.pdf'); }
   const cvOpen=o=>{ cvm.hidden=!o; document.body.classList.toggle('cv-open',o); if(o){ cvm.querySelector('.cv-in').scrollTop=0; $('#cvX').focus(); if(G&&!reduce) G.fromTo('.cv-in',{y:40,opacity:0},{y:0,opacity:1,duration:.5,ease:'power3.out'}); lenis&&lenis.stop(); } else lenis&&lenis.start(); };
   $$('[data-cv]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); if(!mnav.hidden) setMenu(false); cvOpen(true); }));
   $('#cvX').addEventListener('click',()=>cvOpen(false)); cvm.addEventListener('click',e=>{ if(e.target===cvm) cvOpen(false); });
