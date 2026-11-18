@@ -1722,8 +1722,8 @@ ${['Live Chat','Marketplace','Analytics Center'].map(t=>`<span><em></em>${t}</sp
     G.from('.stk-row span',{y:16, opacity:0, stagger:.06, duration:.5, ease:'power3.out', scrollTrigger:{trigger:'.stk-row', start:'top 92%'}});
     G.utils.toArray('.about mark').forEach(m=>G.fromTo(m,{backgroundSize:'0% 42%'},{backgroundSize:'100% 42%', duration:1, ease:'power2.out', scrollTrigger:{trigger:m, start:'top 82%'}}));
     if($('.me')) G.from('.me',{y:-50, opacity:0, rotation:-14, duration:1, ease:'back.out(1.6)', scrollTrigger:{trigger:'.about', start:'top 80%'}});
-    G.from('.bw-card',{y:40, opacity:0, rotation:-2, duration:.9, ease:'power3.out', scrollTrigger:{trigger:'.book', start:'top 80%'}});
-    G.from('.bw-chip',{y:-24, x:20, opacity:0, rotation:6, duration:.8, delay:.3, ease:'back.out(1.8)', scrollTrigger:{trigger:'.book', start:'top 80%'}});
+    { const bc=$('.bw-card')||$('.bw > .bw-done')||$('.bw-embed'); if(bc) G.from(bc,{y:40, opacity:0, rotation:-2, duration:.9, ease:'power3.out', scrollTrigger:{trigger:'.book', start:'top 80%'}}); }
+    if($('.bw-chip')) G.from('.bw-chip',{y:-24, x:20, opacity:0, rotation:6, duration:.8, delay:.3, ease:'back.out(1.8)', scrollTrigger:{trigger:'.book', start:'top 80%'}});
     G.utils.toArray('.case .draw').forEach(p=>G.fromTo(p,{strokeDashoffset:1},{strokeDashoffset:0, duration:1.6, ease:'power2.out', scrollTrigger:{trigger:p, start:'top 85%'}}));
     // active nav link
     [['courses','experience'],['work','work'],['approach','approach'],['experience','experience'],['recommendations','experience'],['contact','contact']].forEach(([id,nv])=>ST.create({trigger:'#'+id, start:'top 50%', end:'bottom 50%', onToggle:s=>{ if(s.isActive) $$('.links a').forEach(a=>a.classList.toggle('on',a.dataset.go===nv)); }}));
